@@ -51,8 +51,44 @@ app.get('/album_duzenleme_ekleme', function(req, res) {
       if (err) {
         console.log(err);
       }
-      sql.close();
-      res.render('album_duzenleme_ekleme', { veri1: data.recordsets });
+      if (data.recordsets[0].length == 0 || data.recordsets[1].length == 0) {
+        sql.close();
+        res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
+        res.write(`
+        <html>
+<head>
+<style>
+.a {
+background-color:deeppink;
+color:white;
+padding:10px 20px;
+border-radius:20px;
+margin:20px;
+font-family:'Segoe UI', Roboto, sans-serif;
+text-decoration:none;
+font-weight:600;
+font-size:20px;
+display:inline-block;
+}
+
+div {
+font-family:'Segoe UI', Roboto, sans-serif;
+margin:20px 20px 0 20px;
+font-size:18px;
+}
+</style>
+</head>
+<body>
+<div>Albüm ekleyebilmek için daha önce en az 1 Sanatçı ve 1 Müzik Türü eklenmiş olmalıdır.</div>
+<a class="a" href="/liste">LİSTEYE DÖN</a>
+</body>
+</html>
+        `);
+        res.end();
+      } else {
+        sql.close();
+        res.render('album_duzenleme_ekleme', { veri1: data.recordsets });
+      }
       // console.log(data) ve console.log(data.recordsets) ile görülebilir
     });
   });
