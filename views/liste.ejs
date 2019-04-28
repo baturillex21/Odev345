@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.min.css" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Odev 345</title>
+    <style>
+      .modalim {
+        border: 1px solid #e0e0e0;
+        border-radius: 10px;
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        box-shadow: 0 0 0 3000px rgba(0, 0, 0, 0.4);
+      }
+
+      table {
+        margin: 50px 0;
+      }
+
+      table td:nth-last-child(1),
+      table td:nth-last-child(2) {
+        width: 140px !important;
+        position: relative;
+      }
+
+      td .is-danger,
+      td .is-warning {
+        width: 100% !important;
+        align-self: center !important;
+      }
+
+      td .p_orta {
+        top: 50%;
+        transform: translateY(-50%);
+        position: absolute;
+        width: calc(100% - 24px) !important;
+      }
+    </style>
+  </head>
+  <body style="padding:50px 0;">
+    <div class="container">
+      <div class="is-flex" style="justify-content: space-between;">
+        <h1 class="title">Kayıtlar</h1>
+        <a style="display:inline-block" href="/album_duzenleme_ekleme" class="button is-success">Yeni Bir Album Ekle</a>
+        <a style="display:inline-block" href="/sanatci_duzenleme_ekleme" class="button is-success">Yeni Bir Sanatçı Ekle</a>
+        <a style="display:inline-block" href="/muziktur_duzenleme_ekleme" class="button is-success">Yeni Bir Müzik Türü Ekle</a>
+      </div>
+
+      <table class="table table-container is-bordered is-striped is-fullwidth">
+        <tr>
+          <td>Album Id</td>
+          <td>Album Adi</td>
+          <td>Cikis Tarihi</td>
+          <td>Sanatci Id</td>
+          <td>Muzik Tur Id</td>
+          <td>Guncelle</td>
+          <td>Sil</td>
+        </tr>
+
+        <% veri[0].forEach(function(p){ %>
+        <form action="/album_guncelleme_post" method="POST">
+          <tr>
+            <td><%= p.AlbumId %></td>
+            <input type="hidden" name="albumId" value="<%= p.AlbumId %>" />
+            <td><%= p.AlbumAdi %></td>
+            <input type="hidden" name="albumAdi" value="<%= p.AlbumAdi %>" />
+            <td><%= p.CikisTarihi %></td>
+            <input type="hidden" name="cikisTarihi" value="<%= p.CikisTarihi %>" />
+            <td><%= p.SanatciId %></td>
+            <input type="hidden" name="sanatciId" value="<%= p.SanatciId %>" />
+            <td><%= p.MuzikTurId %></td>
+            <input type="hidden" name="muzikturId" value="<%= p.MuzikTurId %>" />
+            <td>
+              <button class="button is-warning" type="submit">
+                Guncelle
+              </button>
+            </td>
+            <td><button class="button is-danger album_sil" type="button">Sil</button></td>
+          </tr>
+        </form>
+
+        <% }); %>
+      </table>
+
+      <table class="table table-container is-bordered is-striped is-fullwidth">
+        <tr>
+          <td>Sanatci Id</td>
+          <td>Sanatci Adi</td>
+          <td>Sanatci Yasiyormu</td>
+          <td>Sanatci Dogum Tarihi</td>
+          <td>Eklenme Tarihi</td>
+          <td>Güncelle</td>
+          <td>Sil</td>
+        </tr>
+        <% veri[1].forEach(function(p){ %>
+        <form action="/sanatci_guncelleme_post" method="POST">
+          <tr>
+            <td><%= p.SanatciId %></td>
+            <input type="hidden" name="sanatciId" value="<%= p.SanatciId %>" />
+            <td><%= p.SanatciAdi %></td>
+            <input type="hidden" name="sanatciAdi" value="<%= p.SanatciAdi %>" />
+            <td><%= p.SanatciYasiyormu %></td>
+            <input type="hidden" name="sanatciYasiyormu" value="<%= p.SanatciYasiyormu %>" />
+            <td><%= p.SanatciDogumTarihi %></td>
+            <input type="hidden" name="sanatciDogumTarihi" value="<%= p.SanatciDogumTarihi %>" />
+            <td><%= p.EklenmeTarihi %></td>
+            <input type="hidden" name="eklenmeTarihi" value="<%= p.EklenmeTarihi %>" />
+            <td style="position: relative;">
+              <button class="p_orta button is-warning" type="submit">
+                Guncelle
+              </button>
+            </td>
+            <td style="position: relative;"><button class="p_orta button is-danger sanatci_sil" type="button">Sil</button></td>
+          </tr>
+        </form>
+
+        <% }); %>
+      </table>
+
+      <table class="table table-container is-bordered is-striped is-fullwidth">
+        <tr>
+          <td>Muzik Tur Id</td>
+          <td>Muzik Tur</td>
+          <td>Güncelle</td>
+          <td>Sil</td>
+        </tr>
+        <% veri[2].forEach(function(p){ %>
+        <form action="/muziktur_guncelleme_post" method="POST">
+          <tr>
+            <td><%= p.MuzikTurId %></td>
+            <input type="hidden" name="muzikTurId" value="<%= p.MuzikTurId %>" />
+            <td><%= p.MuzikTur %></td>
+            <input type="hidden" name="muzikTur" value="<%= p.MuzikTur %>" />
+            <td><button class="button is-warning" type="submit">Guncelle</button></td>
+            <td>
+              <button class="button is-danger muziktur_sil" type="button">Sil</button>
+            </td>
+          </tr>
+        </form>
+
+        <% }); %>
+      </table>
+    </div>
+
+    <form class="modal-card modal-card1 modalim" method="POST" action="album_sil">
+      <header class="modal-card-head">
+        <p class="modal-card-title">Sil</p>
+        <button class="delete" aria-label="close" type="button"></button>
+      </header>
+      <section class="modal-card-body">
+        Silmek istediğine emin misin?
+      </section>
+      <input type="hidden" id="silme_onay_input1" name="delete_input1" value="" />
+      <footer class="modal-card-foot">
+        <div class="is-flex" style="width:100%;justify-content: space-between">
+          <button class="button" id="modal_cancel" type="button">Çık</button>
+          <button class="button is-danger" type="submit">Sil</button>
+        </div>
+      </footer>
+    </form>
+
+    <form class="modal-card modal-card2 modalim" method="POST" action="sanatci_sil">
+      <header class="modal-card-head">
+        <p class="modal-card-title">Sil</p>
+        <button class="delete" aria-label="close" type="button"></button>
+      </header>
+      <section class="modal-card-body">
+        Silmek istediğine emin misin?
+      </section>
+      <input type="hidden" id="silme_onay_input2" name="delete_input2" value="" />
+      <footer class="modal-card-foot">
+        <div class="is-flex" style="width:100%;justify-content: space-between">
+          <button class="button" id="modal_cancel" type="button">Çık</button>
+          <button class="button is-danger" type="submit">Sil</button>
+        </div>
+      </footer>
+    </form>
+
+    <form class="modal-card modal-card3 modalim" method="POST" action="muzik_tur_sil">
+      <header class="modal-card-head">
+        <p class="modal-card-title">Sil</p>
+        <button class="delete" aria-label="close" type="button"></button>
+      </header>
+      <section class="modal-card-body">
+        Silmek istediğine emin misin?
+      </section>
+      <input type="hidden" id="silme_onay_input3" name="delete_input3" value="" />
+      <footer class="modal-card-foot">
+        <div class="is-flex" style="width:100%;justify-content: space-between">
+          <button class="button" id="modal_cancel" type="button">Çık</button>
+          <button class="button is-danger" type="submit">Sil</button>
+        </div>
+      </footer>
+    </form>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script>
+      $(function() {
+        $('.delete, #modal_cancel').click(function() {
+          $('.modal-card1, .modal-card2, .modal-card3').fadeOut(300);
+        });
+
+        $('.album_sil').click(function(e) {
+          $('#silme_onay_input1').attr(
+            'value',
+            $(this)
+              .parent()
+              .parent()
+              .children('td:nth-child(1)')
+              .text()
+          );
+
+          $('.modal-card1').fadeIn(300);
+        });
+
+        $('.sanatci_sil').click(function(e) {
+          $('#silme_onay_input2').attr(
+            'value',
+            $(this)
+              .parent()
+              .parent()
+              .children('td:nth-child(1)')
+              .text()
+          );
+
+          $('.modal-card2').fadeIn(300);
+        });
+
+        $('.muziktur_sil').click(function(e) {
+          $('#silme_onay_input3').attr(
+            'value',
+            $(this)
+              .parent()
+              .parent()
+              .children('td:nth-child(1)')
+              .text()
+          );
+
+          $('.modal-card3').fadeIn(300);
+        });
+      });
+    </script>
+    <script src="app.js"></script>
+  </body>
+</html>

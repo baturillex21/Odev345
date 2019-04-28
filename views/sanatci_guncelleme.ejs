@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.min.css" />
+    <title>Sanatçı Güncelleme</title>
+    <style>
+      .input {
+        display: block !important;
+      }
+
+      .noselect {
+        -webkit-touch-callout: none !important; /* iOS Safari */
+        -webkit-user-select: none !important; /* Safari */
+        -khtml-user-select: none !important; /* Konqueror HTML */
+        -moz-user-select: none !important; /* Firefox */
+        -ms-user-select: none !important; /* Internet Explorer/Edge */
+        user-select: none !important; /* Non-prefixed version, currently
+                                        supported by Chrome and Opera */
+        pointer-events: none !important;
+      }
+    </style>
+  </head>
+  <body style="padding:50px 0;">
+    <form id="myForm" class="container" method="POST" action="/sanatci_guncelleme">
+      <h2 class="title">Sanatçı Güncelleme</h2>
+
+      <div class="field is-horizontal">
+        <div class="field-label is-normal">
+          <label class="label has-text-weight-normal">Sanatci Id</label>
+        </div>
+        <div class="field-body">
+          <div class="field">
+            <div class="control">
+              <input class="input noselect" type="text" name="sanatciId" value="<%= sanatci_id %>" />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="field is-horizontal">
+        <div class="field-label is-normal">
+          <label class="label has-text-weight-normal">Eski Sanatci Adi</label>
+        </div>
+        <div class="field-body">
+          <div class="field">
+            <div class="control">
+              <input class="input noselect" type="text" value="<%= sanatci_adi %>" />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="field is-horizontal">
+        <div class="field-label is-normal">
+          <label class="label has-text-weight-normal">Yeni Sanatci Adi</label>
+        </div>
+        <div class="field-body">
+          <div class="field">
+            <div class="control">
+              <input class="input" type="text" name="sanatciAdi_G" id="sanatciAdi_G" />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="field is-horizontal">
+        <div class="field-label is-normal">
+          <label class="label has-text-weight-normal">Eski SanatciYasiyormu</label>
+        </div>
+        <div class="field-body">
+          <div class="field">
+            <div class="control">
+              <%= sanatci_yasiyormu %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="field is-horizontal">
+        <div class="field-label is-normal">
+          <label class="label has-text-weight-normal">Yeni SanatciYasiyormu</label>
+        </div>
+        <div class="field-body">
+          <div class="field">
+            <div class="control">
+              <label> <input type="radio" value="true" name="sanatciYasiyormu_G" /> Evet </label>
+              <label> <input type="radio" value="false" name="sanatciYasiyormu_G" /> Hayır </label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="field is-horizontal">
+        <div class="field-label is-normal">
+          <label class="label has-text-weight-normal">Eski Sanatci Dogum Tarihi</label>
+        </div>
+        <div class="field-body">
+          <div class="field">
+            <div class="control">
+              <input class="input noselect" type="text" value="<%= sanatci_dogum_tarihi %>" />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="field is-horizontal">
+        <div class="field-label is-normal">
+          <label class="label has-text-weight-normal">Yeni Sanatci Dogum Tarihi</label>
+        </div>
+        <div class="field-body">
+          <div class="field">
+            <div class="control">
+              <input class="input" type="text" placeholder="2000" name="sanatciDogumTarihi_G" id="sanatciDogumTarihi_G" />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="field is-horizontal">
+        <div class="field-label">
+          <!-- Left empty for spacing -->
+        </div>
+        <div class="field-body">
+          <div class="field">
+            <div class="control">
+              <button type="submit" class="button is-primary">
+                Değişiklikleri Kaydet
+              </button>
+              <a href="/liste" class="button">
+                Çıkış
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+    <script src="app.js"></script>
+  </body>
+</html>

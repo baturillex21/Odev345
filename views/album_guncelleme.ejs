@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.min.css" />
+    <title>Albüm Güncelleme</title>
+    <style>
+      .input {
+        display: block !important;
+      }
+
+      .noselect {
+        -webkit-touch-callout: none !important; /* iOS Safari */
+        -webkit-user-select: none !important; /* Safari */
+        -khtml-user-select: none !important; /* Konqueror HTML */
+        -moz-user-select: none !important; /* Firefox */
+        -ms-user-select: none !important; /* Internet Explorer/Edge */
+        user-select: none !important; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
+        pointer-events: none !important;
+      }
+    </style>
+  </head>
+  <body style="padding:50px 0;">
+    <form id="myForm" class="container" method="POST" action="/album_guncelleme">
+      <h2 class="title">Albüm Güncelleme</h2>
+
+      <div class="field is-horizontal">
+        <div class="field-label is-normal">
+          <label class="label has-text-weight-normal">Album Id</label>
+        </div>
+        <div class="field-body">
+          <div class="field">
+            <div class="control">
+              <input class="input" type="text" name="albumId" value="<%= album_id %>" />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="field is-horizontal">
+        <div class="field-label is-normal">
+          <label class="label has-text-weight-normal">Eski Album Adi</label>
+        </div>
+        <div class="field-body">
+          <div class="field">
+            <div class="control">
+              <input class="input noselect" type="text" value="<%= album_adi %>" />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="field is-horizontal">
+        <div class="field-label is-normal">
+          <label class="label has-text-weight-normal">Yeni Album Adi</label>
+        </div>
+        <div class="field-body">
+          <div class="field">
+            <div class="control">
+              <input class="input" type="text" name="albumAdi_G" id="albumAdi_G" />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="field is-horizontal">
+        <div class="field-label is-normal">
+          <label class="label has-text-weight-normal">Eski Cikis Tarihi</label>
+        </div>
+        <div class="field-body">
+          <div class="field">
+            <div class="control">
+              <input class="input noselect" type="text" value="<%= cikis_tarihi %>" />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="field is-horizontal">
+        <div class="field-label is-normal">
+          <label class="label has-text-weight-normal">Yeni Cikis Tarihi</label>
+        </div>
+        <div class="field-body">
+          <div class="field">
+            <div class="control">
+              <input class="input" type="date" name="cikisTarihi_G" id="cikisTarihi_G" />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="field is-horizontal">
+        <div class="field-label is-normal">
+          <label class="label has-text-weight-normal">Eski Sanatçı Id</label>
+        </div>
+        <div class="field-body">
+          <div class="field">
+            <div class="control">
+              <input class="input noselect" type="text" value="<%= sanatci_id %>" />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="field is-horizontal">
+        <div class="field-label is-normal">
+          <label class="label has-text-weight-normal">Yeni Sanatci Id</label>
+        </div>
+        <div class="field-body">
+          <div class="field">
+            <div class="select">
+              <select name="sanatciId_G" id="sanatciIdSelect_G">
+                <% veri[0].forEach(function(p){ %>
+                <option value="<%= p.SanatciId %>">
+                  <%= p.SanatciId %> - <%= p.SanatciAdi %>
+                </option>
+                <% }); %>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="field is-horizontal">
+        <div class="field-label is-normal">
+          <label class="label has-text-weight-normal">Eski Müzik Tür Id</label>
+        </div>
+        <div class="field-body">
+          <div class="field">
+            <div class="control">
+              <input class="input noselect" type="text" value="<%= muziktur_id %>" />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="field is-horizontal">
+        <div class="field-label is-normal">
+          <label class="label has-text-weight-normal">Yeni Muzik Tur Id</label>
+        </div>
+        <div class="field-body">
+          <div class="field">
+            <div class="select">
+              <select name="muzikTurId_G" id="muzikTurIdSelect_G">
+                <% veri[1].forEach(function(p){ %>
+                <option value="<%= p.MuzikTurId %>">
+                  <%= p.MuzikTurId %> - <%= p.MuzikTur %>
+                </option>
+                <% }); %>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="field is-horizontal">
+        <div class="field-label">
+          <!-- Left empty for spacing -->
+        </div>
+        <div class="field-body">
+          <div class="field">
+            <div class="control">
+              <button type="submit" class="button is-primary">
+                Değişiklikleri Kaydet
+              </button>
+              <a href="/liste" class="button">
+                Çıkış
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+
+    <script src="app.js"></script>
+  </body>
+</html>
